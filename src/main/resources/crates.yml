@@ -3,21 +3,21 @@ Common:
   # maximum drop is 36 slots, if it is higher it will be ignored
   drops:
     # Example of Normal Items
-    - id: 1
+    - id: "minecraft:stone"
       meta: 0 
       amount: 16 
       chance: 25 # chance 1 - 100
     # Example of Custom Item
     # name = customName
     # lore = description
-    - id: 263
+    - id: "minecraft:coal"
       meta: 0
       name: "Item Custom"
       lore: "nice item made by angga7togk"
       chance: 75
       amount: 10
     # Example of item + enchant
-    - id: 278
+    - id: "minecraft:diamond_pickaxe"
       meta: 0
       amount: 1
       chance: 10
@@ -29,7 +29,7 @@ Common:
         - name: "knockback"
           level: 1
     # Example of using Command
-    - id: 49
+    - id: "minecraft:obsidian"
       meta: 0
       amount: 32
       chance: 15
@@ -38,7 +38,7 @@ Common:
         - "givemoney {player} 1000"
         - "give {player} bread 1"
     # Example of using Broadcast
-    - id: 49
+    - id: "minecraft:obsidian"
       meta: 0
       amount: 32
       chance: 15

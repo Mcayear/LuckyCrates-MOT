@@ -133,11 +133,13 @@ public class RouletteTask extends AsyncTask {
     }
 
     private Item createItemFromDrop(Map<String, Object> drop) {
-        int id = (int) drop.get("id");
+        String id = (String) drop.get("id");
         int meta = (int) drop.get("meta");
         int amount = (int) drop.get("amount");
 
-        Item item = new Item(id, meta, amount);
+        Item item = Item.fromString(id);
+        item.setDamage(meta);
+        item.setCount(amount);
 
         setItemDetails(drop, item);
 

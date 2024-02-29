@@ -50,19 +50,22 @@ public class InstantTask extends Task {
     }
 
     private Item createItem(Map<String, Object> drop) {
-        int id = (int) drop.get("id");
+        String id = (String) drop.get("id");
         int meta = (int) drop.get("meta");
         int amount = (int) drop.get("amount");
         String customName = drop.containsKey("name") ? (String) drop.get("name") : null;
         String lore = drop.containsKey("lore") ? (String) drop.get("lore") : null;
-        Item item = new Item(id, meta, amount);
+        Item item = Item.fromString(id);
+        if(item.isNull()) throw new RuntimeException("Item ID:" + id + " META:" +meta + " not found!");
+        item.setDamage(meta);
+        item.setCount(amount);
         if(customName != null){
             item.setCustomName(customName);
         }
         if(lore != null){
             item.setLore(lore);
         }
-        if(drop.containsKey("enchantments")){
+        if(drop.containsKey("enchantments")) {
             List<Map<String, Object>> enchantList = (List<Map<String, Object>>) drop.get("enchantments");
             for (Map<String, Object> enchant : enchantList){
                 String enchantName = (String) enchant.get("name");

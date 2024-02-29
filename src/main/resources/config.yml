@@ -20,7 +20,7 @@ crates:
 
 # Keys Item
 keys:
-  id: 131
+  id: "minecraft:tripwire_hook"
   meta: 0
   name: "{crate} Key"
   lore: "Claim rewards from a {crate} Crate"

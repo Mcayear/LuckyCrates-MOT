@@ -45,13 +45,15 @@ public class ChestMenu {
         List<Map<String, Object>> dropsList = crateSect.getList("drops");
         int i = 0;
         for (Map<String, Object> drop : dropsList) {
-            int id = (int) drop.get("id");
+            String id = (String) drop.get("id");
             int meta = (int) drop.get("meta");
             int amount = (int) drop.get("amount");
             int chance = (int) drop.get("chance");
             String customName = drop.containsKey("name") ? (String) drop.get("name") : null;
             String lore = drop.containsKey("lore") ? (String) drop.get("lore") : null;
-            Item item = new Item(id, meta, amount);
+            Item item = Item.fromString(id);
+            item.setDamage(meta);
+            item.setCount(amount);
             if (customName != null) {
                 item.setCustomName(customName);
             }
