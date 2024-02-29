@@ -11,6 +11,8 @@ import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
+import cn.nukkit.lang.LangCode;
+import cn.nukkit.lang.PluginI18n;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.ConfigSection;
@@ -25,11 +27,14 @@ public class ChestMenu {
 
     private final Map<String, String> lang;
 
+    private final PluginI18n i18n = LuckyCrates.getI18n();
+
     public ChestMenu() {
         this.lang = new Languages().getLanguage();
     }
 
     public void mainMenu(Player player, String crateName) {
+        LangCode langCode = player.getLanguageCode();
         LuckyCrates.crates.reload();
         FakeInventory inv = new FakeInventory(InventoryType.DOUBLE_CHEST, TextFormat.BOLD + crateName);
         if (!LuckyCrates.crates.exists(crateName)) {
@@ -51,9 +56,9 @@ public class ChestMenu {
                 item.setCustomName(customName);
             }
             if (lore != null) {
-                item.setLore(lore, "", "§eChance, §r" + chance);
+                item.setLore(lore, "", i18n.tr(langCode, "item.chance") + chance);
             } else {
-                item.setLore("", "§eChance, §r" + chance);
+                item.setLore("", i18n.tr(langCode, "item.chance") + chance);
             }
             if (drop.containsKey("enchantments")) {
                 List<Map<String, Object>> enchantList = (List<Map<String, Object>>) drop.get("enchantments");
@@ -75,8 +80,8 @@ public class ChestMenu {
         inv.setItem(49, new Item(130, 0, 1)
                 .setNamedTag(new CompoundTag()
                         .putString("button", "openCrate"))
-                .setCustomName("§l§aOpen Crates")
-                .setLore("", "§eNeed Key, §r" + crateSect.getInt("amount"), "§eMy Key, §r" + getKeysCount(player, crateName)));
+                .setCustomName(i18n.tr(langCode, "item.open_crates"))
+                .setLore("", i18n.tr(langCode, "item.need_key") + crateSect.getInt("amount"), i18n.tr(langCode, "item.my_key") + getKeysCount(player, crateName)));
 
         inv.setDefaultItemHandler((item, event) -> {
             event.setCancelled();
@@ -93,7 +98,7 @@ public class ChestMenu {
                 if (myKey >= needKey) {
                     if (crateSect.exists("commands", true)) {
                         for (String command : crateSect.getStringList("commands")) {
-                            Server.getInstance().executeCommand(Server.getInstance().getConsoleSender(), command.replace("{player}", target.getName()));
+                            Server.getInstance().dispatchCommand(Server.getInstance().getConsoleSender(), command.replace("{player}", target.getName()));
                         }
                     }
                     reduceKey(target, crateName, needKey);

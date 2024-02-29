@@ -12,7 +12,7 @@ public class Languages {
     private final String lang;
     public Languages(){
         String lang = LuckyCrates.getInstance().getConfig().getString("language");
-        if(lang.equalsIgnoreCase("id") || lang.equalsIgnoreCase("en")){
+        if(lang.equalsIgnoreCase("id") || lang.equalsIgnoreCase("en") || lang.equalsIgnoreCase("cn")){
             this.lang = lang;
         }else{
             this.lang = "en";
@@ -24,6 +24,7 @@ public class Languages {
 
         Map<String, String> id = new HashMap<>();
         Map<String, String> en = new HashMap<>();
+        Map<String, String> cn = new HashMap<>();
 
         // Bahasa Indonesia (id)
         id.put("crate-notfound", "§cCrate tidak ditemukan!");
@@ -47,8 +48,20 @@ public class Languages {
         en.put("setted-crate", "§eSuccessfully set up the {crate} crate.");
         en.put("break-crate", "§cSuccessfully broke the {crate} crate.");
 
+        // Chinese (cn)
+        cn.put("crate-notfound", "§c未找到箱子！");
+        cn.put("player-notfound", "§c未找到玩家。");
+        cn.put("setmode", "§e请打破方块以将其更改为箱子。");
+        cn.put("amount-number", "§c数量必须是数字。");
+        cn.put("give-key", "§a成功给予{amount}个{crate}钥匙给{player}。");
+        cn.put("accept-key", "§a您接受了{amount}个{crate}钥匙。");
+        cn.put("key-all", "§a成功给予所有玩家{amount}个{crate}钥匙。");
+        cn.put("setted-crate", "§e成功设置{crate}箱子。");
+        cn.put("break-crate", "§c成功打破{crate}箱子。");
+
         lang.put("id", id);
         lang.put("en", en);
+        lang.put("cn", cn);
 
         return lang.get(this.lang);
     }

@@ -236,7 +236,7 @@ public class RouletteTask extends AsyncTask {
             List<String> commands = getCommandsFromItem(item);
             if(commands != null){
                 for (String command : commands){
-                    Server.getInstance().executeCommand(Server.getInstance().getConsoleSender(), command.replace("{player}", this.getPlayer().getName()));
+                    Server.getInstance().dispatchCommand(Server.getInstance().getConsoleSender(), command.replace("{player}", this.getPlayer().getName()));
                 }
             }
             String broadcast = getBroadcastFromItem(item);

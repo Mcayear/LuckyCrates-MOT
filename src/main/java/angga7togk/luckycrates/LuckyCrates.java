@@ -7,6 +7,8 @@ import angga7togk.luckycrates.listener.Listeners;
 import angga7togk.luckycrates.task.FloatingTextTask;
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.lang.PluginI18n;
+import cn.nukkit.lang.PluginI18nManager;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
@@ -18,9 +20,11 @@ import lombok.Getter;
 import java.util.*;
 
 public class LuckyCrates extends PluginBase {
-
     @Getter
     private static LuckyCrates instance;
+    @Getter
+    private static PluginI18n i18n;
+
     public static Config crates, pos;
     public static int offsetIdEntity = 1;
     public static Map<Player, String> setMode = new HashMap<>();
@@ -29,6 +33,7 @@ public class LuckyCrates extends PluginBase {
     @Override
     public void onLoad() {
         instance = this;
+        i18n = PluginI18nManager.register(this);
     }
 
     @Override
@@ -65,12 +70,13 @@ public class LuckyCrates extends PluginBase {
         Plugin depend = this.getServer().getPluginManager().getPlugin("FakeInventories");
         if (depend != null) {
             String version = depend.getDescription().getVersion();
-            if(!version.equalsIgnoreCase("1.1.5")){
-                MainLogger.getLogger().warning(prefix + TextFormat.RED + "please download the depend first, with version 1.1.5 https://github.com/IWareQ/FakeInventories/releases/tag/v1.1.5");
+            MainLogger.getLogger().warning(version);
+            if(!version.equalsIgnoreCase("1.1.8-MOT")){
+                MainLogger.getLogger().warning(prefix + TextFormat.RED + "please download the depend first, with version 1.1.8 https://github.com/IWareQ/FakeInventories/releases/tag/v1.1.8");
                 this.getServer().getPluginManager().disablePlugin(this);
             }
         } else {
-            MainLogger.getLogger().warning(prefix + TextFormat.RED + "please download the depend first https://github.com/IWareQ/FakeInventories/releases/tag/v1.1.5");
+            MainLogger.getLogger().warning(prefix + TextFormat.RED + "please download the depend first https://github.com/IWareQ/FakeInventories/releases/tag/v1.1.8");
             this.getServer().getPluginManager().disablePlugin(this);
         }
     }

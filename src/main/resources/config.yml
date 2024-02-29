@@ -1,7 +1,8 @@
 # Options Language
 # id = Indonesian
 # en = English
-language: en
+# cn = Chinese
+language: cn
 
 #Prefix Message
 prefix: "§l§a[§r§eLuckyCrates§l§a] §r"

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class FloatingUtils {
 
-    public static void removeEntity(long id, String levelName){
+    public static void removeEntity(long id, String levelName) {
         RemoveEntityPacket pk = new RemoveEntityPacket();
         pk.eid = id;
 
@@ -23,8 +23,7 @@ public class FloatingUtils {
         }
     }
 
-    public static void createEntity(String name, long id, float x, float y, float z, String levelName)
-    {
+    public static void createEntity(String name, long id, float x, float y, float z, String levelName) {
         AddPlayerPacket pk = new AddPlayerPacket();
         pk.entityRuntimeId = id;
         pk.entityUniqueId = id;
